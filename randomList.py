@@ -61,7 +61,7 @@ def selection(arg_list=[]):
     return arg_list
 
 
-def buble(arg_list=[]):
+def bubble(arg_list=[]):
 
     for i in range(len(arg_list)):
         swapped = False
@@ -72,6 +72,32 @@ def buble(arg_list=[]):
 
         if not swapped:
             break
+
+    return arg_list
+
+
+def partition(arg_list, first, pivot):
+
+    q = j = first
+
+    while j < pivot:
+        if arg_list[j] <= arg_list[pivot]:
+            arg_list[q], arg_list[j] = arg_list[j], arg_list[q]
+            q += 1
+        j += 1
+
+    arg_list[q], arg_list[pivot] = arg_list[pivot], arg_list[q]
+    return q
+
+
+def quick(arg_list, first, pivot):
+
+    if pivot <= first:
+        return
+
+    q = partition(arg_list, first, pivot)
+    quick(arg_list, first, q-1)
+    quick(arg_list, q+1, pivot)
 
     return arg_list
 
@@ -105,7 +131,11 @@ total_time = time.clock() - start_time
 print(result2, "-", total_time, "seconds - selection")
 
 start_time = time.clock()
-result3 = buble(my_list.copy())
+result3 = bubble(my_list.copy())
 total_time = time.clock() - start_time
 print(result3, "-", total_time, "seconds - bubble")
 
+start_time = time.clock()
+result3 = quick(my_list.copy(), 0, len(my_list)-1)
+total_time = time.clock() - start_time
+print(result3, "-", total_time, "seconds - quick")
