@@ -48,7 +48,18 @@ def insert(arg_list=[]):
 
 
 def selection(arg_list=[]):
+
+    for i in range(len(arg_list)):
+        k = i
+
+        for j in range(i+1, len(arg_list)):
+            if arg_list[j]<arg_list[k]:
+                k = j
+
+        arg_list[i], arg_list[k] = arg_list[k], arg_list[i]
+
     return arg_list
+
 
 def buble(arg_list=[]):
 
@@ -57,7 +68,7 @@ def buble(arg_list=[]):
         for j in range(len(arg_list) -1, i, -1):
             if arg_list[j] < arg_list[j-1]:
                 arg_list[j], arg_list[j-1] = arg_list[j-1], arg_list[j]
-                swappped = True
+                swapped = True
 
         if not swapped:
             break
@@ -87,6 +98,11 @@ start_time = time.clock()
 result2 = insert(my_list.copy())
 total_time = time.clock() - start_time
 print(result2, "-", total_time, "seconds - insert")
+
+start_time = time.clock()
+result2 = selection(my_list.copy())
+total_time = time.clock() - start_time
+print(result2, "-", total_time, "seconds - selection")
 
 start_time = time.clock()
 result3 = buble(my_list.copy())
